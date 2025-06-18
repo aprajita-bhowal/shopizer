@@ -33,7 +33,7 @@ jobs:
 
     - name: Build project
       run: |
-        ./mvnw clean install -DskipTests=true
+        ./mvnw compile -DskipTests=true
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
