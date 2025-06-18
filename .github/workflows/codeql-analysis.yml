@@ -31,10 +31,9 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Build project
+    - name: Build selected module
       run: |
-        cd sm-shop
-        ../../mvnw compile -DskipTests=true
+        ./mvnw -pl sm-shop compile -DskipTests=true
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
