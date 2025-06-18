@@ -11,7 +11,7 @@ on:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
       packages: read
@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - language: java-kotlin
+        - language: java
 
     steps:
     - name: Checkout repository
@@ -33,8 +33,13 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
+    - name: Build required modules
+      run: |
+        ./mvnw -pl sm-core install -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true
+        ./mvnw -pl sm-shop compile -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:${{ matrix.language }}"
 
