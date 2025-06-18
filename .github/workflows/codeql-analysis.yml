@@ -31,9 +31,9 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Build selected module
+    - name: Build and install all modules
       run: |
-        ./mvnw -pl sm-shop compile -DskipTests=true
+        ./mvnw install -DskipTests -Dmaven.javadoc.skip=true -Dmaven.source.skip=true
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
