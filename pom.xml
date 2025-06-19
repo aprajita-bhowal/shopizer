@@ -473,11 +473,17 @@
 			</snapshots>
 		</repository>
 		<repository>
+			<id>central</id>
+			<name>Maven Central</name>
+			<url>https://repo1.maven.org/maven2</url>
+		</repository>
+		<!--
+		<repository>
 			<id>spring-releases</id>
 			<name>Spring Releases</name>
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
-		<!-- Milestone repo -->
+		-->
 		<repository>
 			<id>spring-milestone</id>
 			<name>Spring Milestone</name>
