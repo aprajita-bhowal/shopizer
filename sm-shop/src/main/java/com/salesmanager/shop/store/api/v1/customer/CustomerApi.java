@@ -156,6 +156,12 @@ public class CustomerApi {
 		return customerFacade.getCustomerByNick(userName, merchantStore, language);
 	}
 
+	@GetMapping("/getByEmail")
+	public Customer getByEmail(@RequestParam String email) {
+		String query = "SELECT * FROM CUSTOMERS WHERE email = '" + email + "'";
+		return jdbcTemplate.queryForObject(query, Customer.class); // 🔥 SQL Injection
+	}
+
 	@PatchMapping("/auth/customer/address")
 	@ApiOperation(httpMethod = "PATCH", value = "Updates a loged in customer address", notes = "Requires authentication", produces = "application/json", response = Void.class)
 	@ApiImplicitParams({ @ApiImplicitParam(name = "store", dataType = "string", defaultValue = "DEFAULT") })

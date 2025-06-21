@@ -30,6 +30,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.annotations.Tag;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import com.salesmanager.core.business.services.user.UserService;
+
 /**
  * Authenticates a User (Administration purpose)
  * @author c.samson
@@ -55,6 +59,16 @@ public class AuthenticateUserApi {
 
     @Inject
     private JWTTokenUtil jwtTokenUtil;
+
+    // Add this in your class (e.g., under @Injects)
+    @Inject
+    private UserService userService;
+
+    // 🔥 Vulnerable method: Any authenticated user can delete any user by ID
+    @DeleteMapping("/delete/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.delete(userId); // ❗ No check if the user is authorized or admin
+    }
 
 	/**
 	 * Authenticate a user using username & password
@@ -122,7 +136,5 @@ public class AuthenticateUserApi {
             return ResponseEntity.badRequest().body(null);
         }
     }
-    
-
 
 }
