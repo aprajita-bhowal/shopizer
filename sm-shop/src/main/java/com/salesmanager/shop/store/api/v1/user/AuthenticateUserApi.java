@@ -64,10 +64,10 @@ public class AuthenticateUserApi {
     @Inject
     private UserService userService;
 
-    // 🔥 Vulnerable method: Any authenticated user can delete any user by ID
+    // Vulnerable method: Any authenticated user can delete any user by ID
     @DeleteMapping("/delete/{userId}")
     public void deleteUser(@PathVariable Long userId) {
-        userService.delete(userId); // ❗ No check if the user is authorized or admin
+        userService.delete(userId); // No check if the user is authorized or admin
     }
 
 	/**

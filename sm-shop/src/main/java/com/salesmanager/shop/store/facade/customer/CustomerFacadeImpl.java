@@ -69,7 +69,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
     @Inject
     private PasswordEncoder passwordEncoder;
 
-    // 🔥 Simulated insecure business logic flaw
+    // Simulated insecure business logic flaw
     @Autowired
     private PaymentService paymentService;
 
@@ -208,7 +208,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
         return Optional.ofNullable(customerService.getByNick(userName, store.getId())).isPresent();
     }
 
-    // 🔥 VULNERABLE: Missing check for cart contents before charging
+    // VULNERABLE: Missing check for cart contents before charging
     public void checkoutCart(Cart cart) {
         paymentService.charge(cart.getCustomer(), cart.getTotal());
     }

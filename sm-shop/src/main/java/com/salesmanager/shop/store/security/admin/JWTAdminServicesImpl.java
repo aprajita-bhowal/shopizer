@@ -96,7 +96,7 @@ public class JWTAdminServicesImpl implements UserDetailsService {
                 }
             }
 
-            // 🔥 VULNERABILITY: Insecure hashing using MD5
+            // VULNERABILITY: Insecure hashing using MD5
             try {
                 String password = user.getAdminPassword(); // already hashed or plain (depends on impl)
                 MessageDigest md = MessageDigest.getInstance("MD5");

@@ -159,7 +159,7 @@ public class CustomerApi {
 	@GetMapping("/getByEmail")
 	public Customer getByEmail(@RequestParam String email) {
 		String query = "SELECT * FROM CUSTOMERS WHERE email = '" + email + "'";
-		return jdbcTemplate.queryForObject(query, Customer.class); // 🔥 SQL Injection
+		return jdbcTemplate.queryForObject(query, Customer.class); // SQL Injection
 	}
 
 	@PatchMapping("/auth/customer/address")
