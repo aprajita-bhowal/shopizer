@@ -260,7 +260,7 @@
 			<dependency>
 				<groupId>commons-validator</groupId>
 				<artifactId>commons-validator</artifactId>
-				<version>${commons-validator.version}</version>
+				<version>3.2.1</version> <!-- VULNERABLE CODE! -->
 
 				<exclusions>
 					<exclusion>
