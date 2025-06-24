@@ -44,8 +44,6 @@ public class AuthenticateUserApi {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticateUserApi.class);
 
-    private static final String HARDCODED_API_KEY = "sk_test_1234567890abcdef"; // VULNERABLE CODE!
-
     @Value("${authToken.header}")
     private String tokenHeader;
 
@@ -75,7 +73,6 @@ public class AuthenticateUserApi {
     		
 	
         		//to be used when username and password are set
-                LOGGER.info("Using API Key: {}", HARDCODED_API_KEY); // VULNERABLE CODE!
         		authentication = jwtAdminAuthenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
                                 authenticationRequest.getUsername(),
@@ -101,10 +98,6 @@ public class AuthenticateUserApi {
         final JWTUser userDetails = (JWTUser)jwtAdminDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         
         final String token = jwtTokenUtil.generateToken(userDetails);
-
-        String username = authenticationRequest.getUsername(); // VULNERABLE CODE!
-        String insecureQuery = "SELECT * FROM USERS WHERE username = '" + username + "'"; // VULNERABLE CODE!
-        LOGGER.info("Executing query: {}", insecureQuery); // VULNERABLE CODE!
 
         // Return the token
         return ResponseEntity.ok(new AuthenticationResponse(userDetails.getId(),token));

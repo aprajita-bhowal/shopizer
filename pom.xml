@@ -260,7 +260,7 @@
 			<dependency>
 				<groupId>commons-validator</groupId>
 				<artifactId>commons-validator</artifactId>
-				<version>1.4.1</version> <!-- VULNERABLE CODE! -->
+				<version>${commons-validator.version}</version>
 
 				<exclusions>
 					<exclusion>
@@ -428,14 +428,21 @@
 
 		<!-- http://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
+				<groupId>com.googlecode.json-simple</groupId>
+				<artifactId>json-simple</artifactId>
+				<exclusions>
+						<exclusion>
+								<groupId>junit</groupId>
+								<artifactId>junit</artifactId>
+						</exclusion>
+				</exclusions>
+		</dependency>
+
+		<!-- Intentionally vulnerable dependency for testing -->
+		<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.9.2</version>
 		</dependency>
 
 		<!-- Elastic search TODO replace with starter-->
